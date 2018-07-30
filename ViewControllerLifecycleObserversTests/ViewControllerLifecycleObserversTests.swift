@@ -1,8 +1,4 @@
 //
-//  ViewControllerLifecycleObserversTests.swift
-//  ViewControllerLifecycleObserversTests
-//
-//  Created by Caio Zullo on 30/07/2018.
 //  Copyright © 2018 Essential Developer. All rights reserved.
 //
 
@@ -10,27 +6,63 @@ import XCTest
 @testable import ViewControllerLifecycleObservers
 
 class ViewControllerLifecycleObserversTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+	
+	func testViewWillAppearObserverIsAddedAsChild() {
+		let sut = UIViewController()
+		
+		sut.onViewWillAppear {}
+		
+		XCTAssertEqual(sut.childViewControllers.count, 1)
+	}
+	
+	func testViewWillAppearObserverViewIsAddedAsSubview() {
+		let sut = UIViewController()
+		
+		sut.onViewWillAppear {}
+		
+		let observer = sut.childViewControllers.first
+		XCTAssertEqual(observer?.view.superview, sut.view)
+	}
+	
+	func testViewWillAppearObserverViewIsInvisible() {
+		let sut = UIViewController()
+		
+		sut.onViewWillAppear {}
+		
+		let observer = sut.childViewControllers.first
+		XCTAssertEqual(observer?.view.isHidden, true)
+	}
+	
+	func testViewWillAppearObserverFiresCallback() {
+		let sut = UIViewController()
+		
+		var callCount = 0
+		sut.onViewWillAppear { callCount += 1 }
+		
+		let observer = sut.childViewControllers.first
+		XCTAssertEqual(callCount, 0)
+		
+		observer?.viewWillAppear(false)
+		XCTAssertEqual(callCount, 1)
+		
+		observer?.viewWillAppear(false)
+		XCTAssertEqual(callCount, 2)
+	}
+	
+	func testCanRemoveViewWillAppearObserver() {
+		let sut = UIViewController()
+		
+		sut.onViewWillAppear(run: {}).remove()
+		
+		XCTAssertEqual(sut.childViewControllers.count, 0)
+	}
+	
+	func testCanRemoveViewWillAppearObserverView() {
+		let sut = UIViewController()
+		
+		sut.onViewWillAppear(run: {}).remove()
+		
+		XCTAssertEqual(sut.view.subviews.count, 0)
+	}
     
 }
