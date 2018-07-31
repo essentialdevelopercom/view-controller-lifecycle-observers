@@ -9,8 +9,10 @@ protocol UIViewControllerLifecycleObserver {
 }
 
 extension UIViewController {
+	typealias Observer = UIViewControllerLifecycleObserver
+
 	@discardableResult
-	func onViewWillAppear(run callback: @escaping () -> Void) -> UIViewControllerLifecycleObserver {
+	func onViewWillAppear(run callback: @escaping () -> Void) -> Observer {
 		return ViewControllerLifecycleObserver(
 			parent: self,
 			viewWillAppearCallback: callback
