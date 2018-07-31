@@ -4,15 +4,15 @@
 
 import UIKit
 
-protocol UIViewControllerLifecycleObserver {
+public protocol UIViewControllerLifecycleObserver {
 	func remove()
 }
 
-extension UIViewController {
-	typealias Observer = UIViewControllerLifecycleObserver
+public extension UIViewController {
+	public typealias Observer = UIViewControllerLifecycleObserver
 
 	@discardableResult
-	func onViewWillAppear(run callback: @escaping () -> Void) -> Observer {
+	public func onViewWillAppear(run callback: @escaping () -> Void) -> Observer {
 		return ViewControllerLifecycleObserver(
 			parent: self,
 			viewWillAppearCallback: callback

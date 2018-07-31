@@ -3,7 +3,7 @@
 //
 
 import XCTest
-@testable import ViewControllerLifecycleObservers
+import ViewControllerLifecycleObservers
 
 class ViewControllerLifecycleObserversTests: XCTestCase {
 	
