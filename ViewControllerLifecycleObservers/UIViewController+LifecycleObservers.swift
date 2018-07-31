@@ -4,13 +4,11 @@
 
 import UIKit
 
-public protocol UIViewControllerLifecycleObserver {
+public protocol Observer {
 	func remove()
 }
 
 public extension UIViewController {
-	public typealias Observer = UIViewControllerLifecycleObserver
-
 	@discardableResult
 	public func onViewWillAppear(run callback: @escaping () -> Void) -> Observer {
 		return ViewControllerLifecycleObserver(
@@ -44,7 +42,7 @@ public extension UIViewController {
 	}
 }
 
-private class ViewControllerLifecycleObserver: UIViewController, UIViewControllerLifecycleObserver {
+private class ViewControllerLifecycleObserver: UIViewController, Observer {
 	private var viewWillAppearCallback: () -> Void = {}
 	private var viewDidAppearCallback: () -> Void = {}
 

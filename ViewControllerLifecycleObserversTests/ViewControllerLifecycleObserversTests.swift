@@ -188,7 +188,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 	}
 	
 	func assertObserver(
-		firesCallback callback: (UIViewController) -> ((@escaping () -> Void) -> UIViewController.Observer), when action: @escaping (UIViewController) -> Void, file: StaticString = #file, line: UInt = #line) {
+		firesCallback callback: (UIViewController) -> ((@escaping () -> Void) -> Observer), when action: @escaping (UIViewController) -> Void, file: StaticString = #file, line: UInt = #line) {
 		let sut = UIViewController()
 		
 		var callCount = 0
@@ -204,7 +204,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		XCTAssertEqual(callCount, 2, file: file, line: line)
 	}
 	
-	func assertCanRemoveObserver(when action: @escaping (UIViewController) -> UIViewController.Observer, file: StaticString = #file, line: UInt = #line) {
+	func assertCanRemoveObserver(when action: @escaping (UIViewController) -> Observer, file: StaticString = #file, line: UInt = #line) {
 		let sut = UIViewController()
 		
 		action(sut).remove()
@@ -212,7 +212,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		XCTAssertEqual(sut.childViewControllers.count, 0, file: file, line: line)
 	}
 	
-	func assertCanRemoveObserverView(when action: @escaping (UIViewController) -> UIViewController.Observer, file: StaticString = #file, line: UInt = #line) {
+	func assertCanRemoveObserverView(when action: @escaping (UIViewController) -> Observer, file: StaticString = #file, line: UInt = #line) {
 		let sut = UIViewController()
 		
 		action(sut).remove()
