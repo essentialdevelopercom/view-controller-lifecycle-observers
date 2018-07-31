@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		08E49257210F2A9D00408C2E /* ViewControllerLifecycleObservers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E4924D210F2A9D00408C2E /* ViewControllerLifecycleObservers.framework */; };
 		08E4925C210F2A9D00408C2E /* ViewControllerLifecycleObserversTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E4925B210F2A9D00408C2E /* ViewControllerLifecycleObserversTests.swift */; };
-		08E4925E210F2A9D00408C2E /* ViewControllerLifecycleObservers.h in Headers */ = {isa = PBXBuildFile; fileRef = 08E49250210F2A9D00408C2E /* ViewControllerLifecycleObservers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		08E49268210F2D0A00408C2E /* UIViewController+LifecycleObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E49267210F2D0A00408C2E /* UIViewController+LifecycleObservers.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +24,6 @@
 
 /* Begin PBXFileReference section */
 		08E4924D210F2A9D00408C2E /* ViewControllerLifecycleObservers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViewControllerLifecycleObservers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		08E49250210F2A9D00408C2E /* ViewControllerLifecycleObservers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewControllerLifecycleObservers.h; sourceTree = "<group>"; };
 		08E49251210F2A9D00408C2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08E49256210F2A9D00408C2E /* ViewControllerLifecycleObserversTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewControllerLifecycleObserversTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E4925B210F2A9D00408C2E /* ViewControllerLifecycleObserversTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerLifecycleObserversTests.swift; sourceTree = "<group>"; };
@@ -73,9 +71,8 @@
 		08E4924F210F2A9D00408C2E /* ViewControllerLifecycleObservers */ = {
 			isa = PBXGroup;
 			children = (
-				08E49250210F2A9D00408C2E /* ViewControllerLifecycleObservers.h */,
-				08E49251210F2A9D00408C2E /* Info.plist */,
 				08E49267210F2D0A00408C2E /* UIViewController+LifecycleObservers.swift */,
+				08E49251210F2A9D00408C2E /* Info.plist */,
 			);
 			path = ViewControllerLifecycleObservers;
 			sourceTree = "<group>";
@@ -96,7 +93,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08E4925E210F2A9D00408C2E /* ViewControllerLifecycleObservers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
