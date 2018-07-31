@@ -45,6 +45,44 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		})
 	}
 	
+	// MARK: View Did Appear Tests
+	
+	func testViewDidAppearObserverIsAddedAsChild() {
+		assertObserverIsAddedAsChild(when: { sut in
+			sut.onViewDidAppear {}
+		})
+	}
+	
+	func testViewDidAppearObserverViewIsAddedAsSubview() {
+		assertObserverViewIsAddedAsSubview(when: { sut in
+			sut.onViewDidAppear {}
+		})
+	}
+	
+	func testViewDidAppearObserverViewIsInvisible() {
+		assertObserverViewIsInvisible(when: { sut in
+			sut.onViewDidAppear {}
+		})
+	}
+	
+	func testViewDidAppearObserverFiresCallback() {
+		assertObserver(
+			firesCallback: { $0.onViewDidAppear },
+			when: { $0.viewDidAppear(false) })
+	}
+	
+	func testCanRemoveViewDidAppearObserver() {
+		assertCanRemoveObserver(when: { sut in
+			sut.onViewDidAppear {}
+		})
+	}
+	
+	func testCanRemoveViewDidAppearObserverView() {
+		assertCanRemoveObserverView(when: { sut in
+			sut.onViewDidAppear {}
+		})
+	}
+	
 	// MARK: Helpers
 	
 	func assertObserverIsAddedAsChild(when action: @escaping (UIViewController) -> Void, file: StaticString = #file, line: UInt = #line) {
