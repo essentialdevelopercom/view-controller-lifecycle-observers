@@ -30,7 +30,7 @@ private class ViewControllerLifecycleObserver: UIViewController, UIViewControlle
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(false)
+		super.viewWillAppear(animated)
 		
 		viewWillAppearCallback()
 	}
