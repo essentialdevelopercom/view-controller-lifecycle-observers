@@ -1,6 +1,6 @@
 # UIViewController Lifecycle Observers
 
-Useful UIViewController extension for composing/creating reusable view controllers – no swizzling or subclassing needed!
+Useful UIViewController extension for composing/creating reusable view controllers – no swizzling or subclassing needed! Learn more at: https://www.essentialdeveloper.com/articles/composing-view-controllers-part-3-lifecycle-observers-in-swift 
 
 ```
 controller.onViewWillAppear {
