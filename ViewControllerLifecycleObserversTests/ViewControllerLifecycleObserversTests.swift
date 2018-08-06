@@ -159,6 +159,33 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		})
 	}
 	
+	// MARK: Integration Tests
+	
+	func testObserversWorkingWithNavigationControllerTransitions() {
+		let navigation = UINavigationController()
+		let window = UIWindow(frame: UIScreen.main.bounds)
+		window.rootViewController = navigation
+		window.makeKeyAndVisible()
+		
+		let exp = expectation(description: "Wait for lifecycle callbacks")
+		let view = UIViewController()
+		
+		view.onViewWillAppear { [weak view, weak navigation] in
+			view?.onViewDidAppear {
+				navigation?.setViewControllers([], animated: true)
+				
+				view?.onViewWillDisappear {
+					view?.onViewDidDisappear {
+						exp.fulfill()
+					}
+				}
+			}
+		}
+		
+		navigation.pushViewController(view, animated: true)
+		wait(for: [exp], timeout: 1)
+	}
+	
 	// MARK: Helpers
 	
 	func assertObserverIsAddedAsChild(when action: @escaping (UIViewController) -> Void, file: StaticString = #file, line: UInt = #line) {
