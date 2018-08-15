@@ -43,18 +43,18 @@ public extension UIViewController {
 }
 
 private class ViewControllerLifecycleObserver: UIViewController, Observer {
-	private var viewWillAppearCallback: () -> Void = {}
-	private var viewDidAppearCallback: () -> Void = {}
+	private var viewWillAppearCallback: (() -> Void)? = nil
+	private var viewDidAppearCallback: (() -> Void)? = nil
 
-	private var viewWillDisappearCallback: () -> Void = {}
-	private var viewDidDisappearCallback: () -> Void = {}
+	private var viewWillDisappearCallback: (() -> Void)? = nil
+	private var viewDidDisappearCallback: (() -> Void)? = nil
 
 	convenience init(
 		parent: UIViewController,
-		viewWillAppearCallback: @escaping () -> Void = {},
-		viewDidAppearCallback: @escaping () -> Void = {},
-		viewWillDisappearCallback: @escaping () -> Void = {},
-		viewDidDisappearCallback: @escaping () -> Void = {}) {
+		viewWillAppearCallback: (() -> Void)? = nil,
+		viewDidAppearCallback: (() -> Void)? = nil,
+		viewWillDisappearCallback: (() -> Void)? = nil,
+		viewDidDisappearCallback: (() -> Void)? = nil) {
 		self.init()
 		self.add(to: parent)
 		self.viewWillAppearCallback = viewWillAppearCallback
@@ -66,25 +66,25 @@ private class ViewControllerLifecycleObserver: UIViewController, Observer {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		viewWillAppearCallback()
+		viewWillAppearCallback?()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		viewDidAppearCallback()
+		viewDidAppearCallback?()
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
-		viewWillDisappearCallback()
+		viewWillDisappearCallback?()
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
-		viewDidDisappearCallback()
+		viewDidDisappearCallback?()
 	}
 
 	private func add(to parent: UIViewController) {
