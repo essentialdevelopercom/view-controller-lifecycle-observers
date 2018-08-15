@@ -161,7 +161,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 	
 	// MARK: Integration Tests
 	
-	func testObserversWorkingWithNavigationControllerTransitions() {
+	func testObserversWorkingWithNavigationControllerAnimatedTransitions() {
 		let navigation = UINavigationController()
 		let window = UIWindow(frame: UIScreen.main.bounds)
 		window.rootViewController = navigation
@@ -183,6 +183,31 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		}
 		
 		navigation.pushViewController(view, animated: true)
+		wait(for: [exp], timeout: 1)
+	}
+	
+	func testObserversWorkingWithNavigationControllerNonAnimatedTransitions() {
+		let navigation = UINavigationController()
+		let window = UIWindow(frame: UIScreen.main.bounds)
+		window.rootViewController = navigation
+		window.makeKeyAndVisible()
+		
+		let exp = expectation(description: "Wait for lifecycle callbacks")
+		let view = UIViewController()
+		
+		view.onViewWillAppear { [weak view, weak navigation] in
+			view?.onViewDidAppear {
+				view?.onViewWillDisappear {
+					view?.onViewDidDisappear {
+						exp.fulfill()
+					}
+				}
+				
+				navigation?.setViewControllers([], animated: false)
+			}
+		}
+		
+		navigation.pushViewController(view, animated: false)
 		wait(for: [exp], timeout: 1)
 	}
 	
