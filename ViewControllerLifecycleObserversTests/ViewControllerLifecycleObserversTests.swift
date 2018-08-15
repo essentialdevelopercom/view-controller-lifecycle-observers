@@ -172,13 +172,13 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		
 		view.onViewWillAppear { [weak view, weak navigation] in
 			view?.onViewDidAppear {
-				navigation?.setViewControllers([], animated: true)
-				
 				view?.onViewWillDisappear {
 					view?.onViewDidDisappear {
 						exp.fulfill()
 					}
 				}
+				
+				navigation?.setViewControllers([], animated: true)
 			}
 		}
 		
