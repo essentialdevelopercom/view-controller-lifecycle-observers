@@ -9,32 +9,49 @@ public protocol Observer {
 }
 
 public extension UIViewController {
+    
+    /// Event that notifies the view controller is about to be added to a view hierarchy.
+    ///
+    /// - Parameter callback: The closure to execute.
+    /// - Returns: The observer for unsubscribing to event.
 	@discardableResult
-	public func onViewWillAppear(run callback: @escaping () -> Void) -> Observer {
+	func onViewWillAppear(run callback: @escaping () -> Void) -> Observer {
 		return ViewControllerLifecycleObserver(
 			parent: self,
 			viewWillAppearCallback: callback
 		)
 	}
 	
+    /// Event that notifies the view controller was added to a view hierarchy.
+    ///
+    /// - Parameter callback: The closure to execute.
+    /// - Returns: The observer for unsubscribing to event.
 	@discardableResult
-	public func onViewDidAppear(run callback: @escaping () -> Void) -> Observer {
+	func onViewDidAppear(run callback: @escaping () -> Void) -> Observer {
 		return ViewControllerLifecycleObserver(
 			parent: self,
 			viewDidAppearCallback: callback
 		)
 	}
 	
+    /// Event that notifies the view controller is about to be removed from a view hierarchy.
+    ///
+    /// - Parameter callback: The closure to execute.
+    /// - Returns: The observer for unsubscribing to event.
 	@discardableResult
-	public func onViewWillDisappear(run callback: @escaping () -> Void) -> Observer {
+	func onViewWillDisappear(run callback: @escaping () -> Void) -> Observer {
 		return ViewControllerLifecycleObserver(
 			parent: self,
 			viewWillDisappearCallback: callback
 		)
 	}
 	
+    /// Event that notifies the view controller was removed from a view hierarchy.
+    ///
+    /// - Parameter callback: The closure to execute.
+    /// - Returns: The observer for unsubscribing to event.
 	@discardableResult
-	public func onViewDidDisappear(run callback: @escaping () -> Void) -> Observer {
+	func onViewDidDisappear(run callback: @escaping () -> Void) -> Observer {
 		return ViewControllerLifecycleObserver(
 			parent: self,
 			viewDidDisappearCallback: callback
@@ -88,15 +105,15 @@ private class ViewControllerLifecycleObserver: UIViewController, Observer {
 	}
 
 	private func add(to parent: UIViewController) {
-		parent.addChildViewController(self)
+		parent.addChild(self)
 		view.isHidden = true
 		parent.view.addSubview(view)
-		didMove(toParentViewController: parent)
+		didMove(toParent: parent)
 	}
 
 	func remove() {
-		willMove(toParentViewController: nil)
+		willMove(toParent: nil)
 		view.removeFromSuperview()
-		removeFromParentViewController()
+		removeFromParent()
 	}
 }
