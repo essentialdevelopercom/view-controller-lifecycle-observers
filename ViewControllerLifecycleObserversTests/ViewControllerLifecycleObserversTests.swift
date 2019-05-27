@@ -218,7 +218,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		
 		action(sut)
 		
-		XCTAssertEqual(sut.childViewControllers.count, 1, file: file, line: line)
+		XCTAssertEqual(sut.children.count, 1, file: file, line: line)
 	}
 	
 	func assertObserverViewIsAddedAsSubview(when action: @escaping (UIViewController) -> Void, file: StaticString = #file, line: UInt = #line) {
@@ -226,7 +226,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		
 		action(sut)
 		
-		let observer = sut.childViewControllers.first
+		let observer = sut.children.first
 		XCTAssertEqual(observer?.view.superview, sut.view, file: file, line: line)
 	}
 	
@@ -235,7 +235,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		
 		action(sut)
 		
-		let observer = sut.childViewControllers.first
+		let observer = sut.children.first
 		XCTAssertEqual(observer?.view?.isHidden, true, file: file, line: line)
 	}
 	
@@ -246,7 +246,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		var callCount = 0
 		_ = callback(sut)({ callCount += 1 })
 		
-		let observer = sut.childViewControllers.first!
+		let observer = sut.children.first!
 		XCTAssertEqual(callCount, 0, file: file, line: line)
 		
 		action(observer)
@@ -261,7 +261,7 @@ class ViewControllerLifecycleObserversTests: XCTestCase {
 		
 		action(sut).remove()
 		
-		XCTAssertEqual(sut.childViewControllers.count, 0, file: file, line: line)
+		XCTAssertEqual(sut.children.count, 0, file: file, line: line)
 	}
 	
 	func assertCanRemoveObserverView(when action: @escaping (UIViewController) -> Observer, file: StaticString = #file, line: UInt = #line) {
